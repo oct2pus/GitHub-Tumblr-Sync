@@ -3,17 +3,15 @@ require 'octokit'
 require 'configatron'
 require_relative 'config'
 
-Tumblr.configure do |config|
-	config.consumer_key = Configatron.tumblr_consumer_key
-	config.consumer_secret = Configatron.tumblr_consumer_secret
-	config.oauth_token = Configatron.tumblr_oauth_token
-	config.oauth_token_secret = Configatron.tumblr_oauth_token_secret
-end
+tumblr_client = Tumblr::Client.new({
+	:consumer_key => configatron.tumblr_consumer_key,
+	:consumer_secret => configatron.tumblr_consumer_secret,
+	:oauth_token => configatron.tumblr_oauth_token,
+	:oauth_token_secret => configatron.tumblr_oauth_token_secret
+})
 
-Octokit.configure do |config|
-	config.login = Configatron.github_login
-	config.password = Configatron.github_token
-end
+github_client = Octokit::Client.new({
+	:access_token => configatron.github_token
+})
 
-tumblr_client = Tumblr::Client.new
-github_client = Octokit::Client.new
+puts "#{tumblr_client.text("jadebot-discord", title: "hewwo", body: "wrote this in ruby working on a way to sync tumblr and github commits lmao")}"
