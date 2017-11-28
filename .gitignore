@@ -51,3 +51,6 @@ build-iPhoneSimulator/
 
 #ignore config
 config.rb
+
+#ignore .swp
+.*.rb.swp
