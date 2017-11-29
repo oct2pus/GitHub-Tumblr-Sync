@@ -12,6 +12,6 @@ configatron.github_repo = ''
 configatron.tumblr_blog = ''
 
 #Settings
-configatron.time_between_pulls = 600	#in seconds
-configatron.time_between_posts = 60		#in seconds
+configatron.time_between_pulls = 600		#in seconds
+configatron.time_between_posts = 300		#in seconds
 configatron.size_of_commit_log = 50
