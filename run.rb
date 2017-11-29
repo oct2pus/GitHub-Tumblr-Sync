@@ -3,6 +3,7 @@ require 'octokit'
 require 'configatron'
 require_relative 'config'
 
+##Client API Logins
 tumblr_client = Tumblr::Client.new({
 	:consumer_key => configatron.tumblr_consumer_key,
 	:consumer_secret => configatron.tumblr_consumer_secret,
@@ -11,19 +12,23 @@ tumblr_client = Tumblr::Client.new({
 })
 
 github_client = Octokit::Client.new({
-	:access_token => configatron.github_token
+	:access_token => configatron.github_token,
+	:per_page => configatron.size_of_commit_log
 })
 
+
+#Other variables
 old = github_client.commits(configatron.github_repo)
 last_change_found = false
 counter = 0
 
 
+#Process Loop, end program with ^C
 while true
 	new = github_client.commits(configatron.github_repo)
 	puts "Pulling commits from #{github_client.repository(configatron.github_repo).full_name}."
 	if old[0].sha != new[0].sha
-			while !last_change_found || counter == 30
+			while !last_change_found || counter == configatron.size_of_commit_log
 				if new[counter].sha == old[0].sha
 					last_change_found = true
 				else
@@ -36,6 +41,6 @@ while true
 			last_change_found = false
 			counter = 0
 	end
-	old = github_client.commits("oct2pus/dummyrepo")
+	old = new
 	sleep(configatron.time_between_pulls)
 end
