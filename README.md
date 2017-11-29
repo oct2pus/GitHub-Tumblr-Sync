@@ -1,5 +1,5 @@
 # GitHub-Tumblr-Sync
-Syncs a tumblr blog and a github commits
+Syncs a tumblr blog and a github commits.
 
 # Dependencies
 Install bundler with `gem install bundler` and then do `bundle install` to install the gems required, fill out `.config.rb` and rename it to `config.rb`, put it on a server and let it run and you're good to go. You will need to supply your own OAuth passcodes. The final 3 values are my personal values for those but feel free to change them, just be mindful of your rate limit.
